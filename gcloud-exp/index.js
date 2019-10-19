@@ -20,6 +20,4 @@ app.use(morgan(loggingConf));
 app.use(express.json());
 app.use(userRouter);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-})
+exports.authuserApi = app;
