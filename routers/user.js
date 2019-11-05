@@ -1,21 +1,22 @@
 /**
  * USER
  */
-
+const util = require('util')
 const express = require('express')
 const User = require('../models/User')
 const auth = require('../middleware/auth')
-
-
 const router = express.Router()
+util.log('-> Init Router/user')
 
 router.get('/users/me', auth, async(req, res) => {
+    util.log('REQUEST: GET /users/me');
     // View logged in user profile
     res.send(req.user)
 })
 
 router.post('/users', async (req, res) => {
     // Create a new user
+    util.log('REQUEST: POST /users');
     try {
         const user = new User(req.body)
         await user.save()
@@ -27,6 +28,7 @@ router.post('/users', async (req, res) => {
 })
 
 router.post('/users/login', async(req, res) => {
+    util.log('REQUEST: POST /users/login');
     //Login a registered user
     try {
         const { email, password } = req.body
@@ -43,6 +45,7 @@ router.post('/users/login', async(req, res) => {
 })
 
 router.post('/users/me/logout', auth, async (req, res) => {
+    util.log('REQUEST: POST /users/me/logout');
     // Log user out of the application
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -56,6 +59,7 @@ router.post('/users/me/logout', auth, async (req, res) => {
 })
 
 router.post('/users/me/logoutall', auth, async(req, res) => {
+    util.log('REQUEST: POST /users/me/logoutAll');
     // Log user out of all devices
     try {
         req.user.tokens.splice(0, req.user.tokens.length)

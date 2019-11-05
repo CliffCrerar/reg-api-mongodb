@@ -1,2 +1,2 @@
-const path = requir('path');
-exports.authUserApi = require(path.join(__dirname, 'src', 'app'));
+const path = require('path');
+exports.authUserApi = require(path.join(__dirname, 'app'));

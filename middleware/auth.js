@@ -1,11 +1,12 @@
 /**
  * AUTH
  */
-
+const util = require('util')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
-
+util.log('-> Init Auth');
 const auth = async(req, res, next) => {
+    util.log('RUNNING: User pre schema')
     const token = req.header('Authorization').replace('Bearer ', '')
     const data = jwt.verify(token, process.env.JWT_KEY)
     try {
