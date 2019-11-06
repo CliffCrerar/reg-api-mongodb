@@ -37,6 +37,6 @@ if(process.env.NODE_ENV==='development'){
         console.log(`### --> Development Server running on port ${host}:${port}`);
     })
 } else {
-    module.exports = app;
+    exports.authUserApi = app;
 }
 
