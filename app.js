@@ -17,8 +17,8 @@ const
     port = process.env.PORT,
     morgan = require('morgan'),
     app = express(),
-    os= require('os');
-    log =require('./logs');
+    os= require('os'),
+    log =require('./logs'),
     host = process.env.NODE_ENV==='development'?process.env.HOST:os.hostname(),
     loggingConf = fs.readFileSync(path.join(__dirname,'logs/.conf'),'utf8');
 
