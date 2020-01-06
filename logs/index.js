@@ -16,11 +16,11 @@ module.exports = (req,res,next)=> {
 }
 
 function logPost(req){
-    // console.log(req);
+    console.log(req);
     console.log(`
         ORIGIN: ${req.hostname}\n
         HEADERS: ${JSON.stringify(req.headers)}\n
-        QUERY: ${req.query}\n
+        QUERY: ${JSON.stringify(req.query)}\n
         BODY: ${req.data}
     `);
 }

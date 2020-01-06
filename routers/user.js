@@ -19,6 +19,7 @@ router.post('/users', async (req, res) => {
     util.log('REQUEST: POST /users');
     try {
         const user = new User(req.body)
+        console.log('req.body: ', req.body);
         await user.save()
         const token = await user.generateAuthToken()
         res.status(201).send({ user, token })
@@ -41,7 +42,6 @@ router.post('/users/login', async(req, res) => {
     } catch (error) {
         res.status(400).send(error)
     }
-
 })
 
 router.post('/users/me/logout', auth, async (req, res) => {
