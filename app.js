@@ -3,9 +3,9 @@
 /**
  * APP
  */
+require('dotenv').config();
 require('util').log('-> Init ENV VARS');
 require('./db') // initialize mongoose and connect to db
-require('dotenv').config();
 process.env.NODE_PATH = __dirname;
 const
     express = require('express'),
@@ -23,6 +23,7 @@ let
     host = process.env.NODE_ENV==='development'?process.env.HOST:os.hostname();
 
 // console.log(process);
+
 console.log(`Running in ${process.env.NODE_ENV} mode`);
 app.all('*',log)
 app.use(morgan(loggingConf));

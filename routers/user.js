@@ -22,6 +22,7 @@ router.post('/users', async (req, res) => {
         console.log('req.body: ', req.body);
         await user.save()
         const token = await user.generateAuthToken()
+        res.cookie('auth',token);
         res.status(201).send({ user, token })
     } catch (error) {
         res.status(400).send(error)
@@ -38,6 +39,7 @@ router.post('/users/login', async(req, res) => {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
         }
         const token = await user.generateAuthToken()
+        res.cookie('auth',token);
         res.send({ user, token })
     } catch (error) {
         res.status(400).send(error)
@@ -51,8 +53,8 @@ router.post('/users/me/logout', auth, async (req, res) => {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token != req.token
         })
-        await req.user.save()
-        res.send()
+        const logoutUser = await req.user.save()
+        res.send(logoutUser);
     } catch (error) {
         res.status(500).send(error)
     }
@@ -63,8 +65,8 @@ router.post('/users/me/logoutall', auth, async(req, res) => {
     // Log user out of all devices
     try {
         req.user.tokens.splice(0, req.user.tokens.length)
-        await req.user.save()
-        res.send()
+        const logoutUsers = await req.user.save()
+        res.send(logoutUsers)
     } catch (error) {
         res.status(500).send(error)
     }

@@ -2,12 +2,7 @@ const util = require('util');
 
 module.exports = (req,res,next)=> {
     try{
-        util.log('Received Request');
-        if(req.method==='GET'){
-            logGet(req);
-        } else if(req.method==='POST'){
-            logPost(req);
-        }
+        console.log(res.status(), req.path, ' | QUERY:', req.query, ' | PARAMS:',req.params);
         next();
     }catch(err){
         console.error('ERROR in Log',err);
